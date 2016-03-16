@@ -1,6 +1,5 @@
-"use strict";
-
 function addListItem() {
+    "use strict";
     var $list__item = $("<div class=\"mdl-list__item\"></div>"),
         $primary_content = $("<span class=\"mdl-list__item-primary-content\"></span>");
     $(".demo-list-action").append($list__item);
@@ -11,14 +10,15 @@ function addListItem() {
 }
 
 function updateItem(actors, pos) {
-    $(".demo-list-action").find(":nth-child(" + (pos+1) + ")").find(":nth-child(1)").find(":nth-child(2)").text(actors[pos].name);
-    if(actors[pos].starred === false) {
-        $(".demo-list-action").find(":nth-child(" + (pos+1) + ")").find(":nth-child(2)").find(":nth-child(1)").text("star_border");
+    "use strict";
+    $(".demo-list-action").find(":nth-child(" + (pos + 1) + ")").find(":nth-child(1)").find(":nth-child(2)").text(actors[pos].name);
+    if (actors[pos].starred === false) {
+        $(".demo-list-action").find(":nth-child(" + (pos + 1) + ")").find(":nth-child(2)").find(":nth-child(1)").text("star_border");
     }
 }
 
-$.getJSON("http://localhost:3000/actors", function (actors) {
-
+$.getJSON("http://localhost:3000/actors", function(actors) {
+    "use strict";
     var i = 0;
 
     for (i = 0; i < actors.length; i++) {
@@ -27,10 +27,12 @@ $.getJSON("http://localhost:3000/actors", function (actors) {
     }
 
     $(".mdl-list__item-secondary-action").click(function() {
-        var index = ($(this).parent().index()+1);
+
+        var index = ($(this).parent().index() + 1);
         var star = $(this);
 
-        $.getJSON("http://localhost:3000/actors/" + index, function (actor) {
+        $.getJSON("http://localhost:3000/actors/" + index, function(actor) {
+
             console.log(actor);
             var newActor = actor;
             if (star.find(":first-child").text() === "star") {
@@ -56,8 +58,11 @@ $.getJSON("http://localhost:3000/actors", function (actors) {
 });
 
 $(".mdl-button").click(function() {
-
-    var person = { name: $(".mdl-textfield__input").val(), starred: false };
+    "use strict";
+    var person = {
+        name: $(".mdl-textfield__input").val(),
+        starred: false
+    };
 
     $.ajax({
         url: "http://localhost:3000/actors",
@@ -66,8 +71,8 @@ $(".mdl-button").click(function() {
         dataType: "json",
     });
 
-    $.getJSON("http://localhost:3000/actors", function (actors) {
-            addListItem();
-            updateItem(actors, actors.length-1);
-        });
+    $.getJSON("http://localhost:3000/actors", function(actors) {
+        addListItem();
+        updateItem(actors, actors.length - 1);
+    });
 });
